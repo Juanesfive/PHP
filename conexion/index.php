@@ -1,102 +1,80 @@
 <?php
-
-
 require('conexion.php');
-
-$db = "";
-$conexion = "";
 
 $db = new Conexion();
 $conexion = $db->getConexion();
 
-$sql = "SELECT * FROM ciudades"; // consulta para las ciudades
+// Consultar ciudades
+$sql_ciudades = "SELECT * FROM ciudades";
+$stm_ciudades = $conexion->prepare($sql_ciudades);
+$stm_ciudades->execute();
+$ciudades = $stm_ciudades->fetchAll();
+
+// Consultar géneros
 $sql_generos = "SELECT * FROM generos";
-$sql_lenguajes = "SELECT * FROM LENGUAJES"; // consulta para los generos
-// preparar los datos para las ciudades
-$bandera = $conexion->prepare($sql);
-$bandera->execute();
-$ciudades = $bandera->fetchAll();
-// preparar los datos para los generos
-$bandera_generos = $conexion->prepare($sql_generos);
-$bandera_generos->execute();
-$generos = $bandera_generos->fetchAll();
-// preparar para lenguajes
-$bandera_lenguajes = $conexion -> prepare($sql_lenguajes);
-$bandera_lenguajes -> execute();
-$LENGUAJES = $bandera_lenguajes ->fetchAll();
+$stm_generos = $conexion->prepare($sql_generos);
+$stm_generos->execute();
+$generos = $stm_generos->fetchAll();
 
-
-
+// Consultar lenguajes
+$sql_lenguajes = "SELECT * FROM lenguajes";
+$stm_lenguajes = $conexion->prepare($sql_lenguajes);
+$stm_lenguajes->execute();
+$lenguajes = $stm_lenguajes->fetchAll();
 ?>
+
 <form action="controlador.php" method="post">
     <fieldset>
-        <legend>Conexion PHP a MySQL</legend>
+        <legend>Conexión PHP a MySQL</legend>
         <div>
             <label for="nombre">Nombres</label>
-            <input type="text" id="nombre" name="nombre" placeholder="Nombre">
+            <input type="text" id="nombre" name="nombre" placeholder="Nombre" required>
         </div>
         <div>
             <label for="apellido">Apellido</label>
-            <input type="text" id="apellido" name="apellido" placeholder="Apellido">
+            <input type="text" id="apellido" name="apellido" placeholder="Apellido" required>
         </div>
         <div>
             <label for="correo">Correo</label>
-            <input type="text" id="correo" name="correo" placeholder="Correo">
+            <input type="email" id="correo" name="correo" placeholder="Correo" required>
         </div>
         <div>
             <label for="fecha_nacimiento">Fecha Nacimiento</label>
-            <input type="date" id="fecha_nacimiento" name="fecha_nacimiento" placeholder="Fecha">
+            <input type="date" id="fecha_nacimiento" name="fecha_nacimiento" required>
         </div>
-
         <div>
             <label for="id_ciudad">Ciudades</label>
-            <select name="id_ciudad" id="id_ciudad">
-                <?php
-                
-                foreach ($ciudades as $key => $value) {
-                ?>
-                    <option id="<?= $value['id_ciudad'] ?>" value="<?= $value['id_ciudad'] ?>">
-                        <?= $value['nom_ciudad'] ?>
-                    </option>
-                <?php
-                }
-                ?>
+            <select name="id_ciudad" id="id_ciudad" required>
+                <?php foreach ($ciudades as $ciudad): ?>
+                    <option value="<?= $ciudad['id'] ?>"><?= $ciudad['nombre'] ?></option>
+                <?php endforeach; ?>
             </select>
         </div>
-
         <div>
-            
-            <?php
-                echo "<br>";
-            foreach ($generos as $key => $value) {
-            ?>
+            <label>Género</label>
+            <?php foreach ($generos as $genero): ?>
                 <div>
-                    <label for="GENEROS<?= $value['id_genero'] ?>"><?= $value['nom_genero'] ?>
-                        <input type="radio" name="id_genero" value="<?= $value['id_genero'] ?>" id="GENEROS<?= $value['id_genero'] ?>">
+                    <label>
+                        <input type="radio" name="id" value="<?= $genero['id'] ?>" required>
+                        <?= $genero['nombre'] ?>
                     </label>
                 </div>
-            <?php
-            }
-            ?>
+            <?php endforeach; ?>
         </div>
-
         <div>
-            <?php
-                echo "<br>";
-            foreach ($LENGUAJES as $key => $value) {
-            ?>
+            <label>Lenguajes</label>
+            <?php foreach ($lenguajes as $lenguaje): ?>
                 <div>
-                    <label for="LENGUAJES<?= $value['id_leng'] ?>"><?= $value['nom_lenguaje'] ?>
-                        <input type="checkbox" name="LENGUAJES []" value="<?= $value['id_leng'] ?>" id="LENGUAJES<?= $value['id_leng'] ?>">
+                    <label>
+                        <input type="checkbox" name="LENGUAJES[]" value="<?= $lenguaje['id'] ?>">
+                        <?= $lenguaje['nombre'] ?>
                     </label>
                 </div>
-            <?php
-            }
-
-            ?>
+            <?php endforeach; ?>
         </div>
-        
-            <br>
-        <button>Guardar Datos</button>
+        <br>
+        <button type="submit">Guardar Datos</button>
     </fieldset>
 </form>
+
+
