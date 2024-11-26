@@ -20,8 +20,12 @@ $lenguajes_seleccionados = $_POST['LENGUAJES'] ?? []; // Array de lenguajes sele
 
 // Validar los datos obligatorios
 if (!$nombre || !$apellido || !$correo || !$fecha_nacimiento || !$id_genero || !$id_ciudad) {
-    die("Error: Faltan datos obligatorios.");
+    echo "Error: Faltan datos obligatorios.<br>";
+} else {
+    
+    echo "Todos los datos obligatorios están presentes.<br>";
 }
+
 
 // Insertar en la tabla USUARIOS
 $sql_usuarios = "INSERT INTO usuarios (nombre, apellido, correo, fecha_nacimiento, id_genero, id_ciudad) 
@@ -38,8 +42,9 @@ $stm_usuarios->bindParam(":id_ciudad", $id_ciudad);
 if ($stm_usuarios->execute()) {
     echo "Datos del usuario guardados exitosamente.<br>";
 } else {
-    die("Error al guardar los datos del usuario.");
+    echo "Error al guardar los datos del usuario.<br>";
 }
+
 
 // Obtener el ID del usuario recién insertado
 $id_usuario = $conexion->lastInsertId();
@@ -52,11 +57,6 @@ foreach ($lenguajes_seleccionados as $id_lenguaje) {
     $stm_lenguajes_usuarios->bindParam(":id_usuario", $id_usuario);
     $stm_lenguajes_usuarios->bindParam(":id_lenguaje", $id_lenguaje);
 
-    if ($stm_lenguajes_usuarios->execute()) {
-        echo "Lenguaje con ID $id_lenguaje asociado al usuario exitosamente.<br>";
-    } else {
-        echo "Error al asociar el lenguaje con ID $id_lenguaje.<br>";
-    }
 }
 
 
