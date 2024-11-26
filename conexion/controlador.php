@@ -3,31 +3,28 @@ require('conexion.php');
 
 $db = new Conexion();
 
-echo "<pre>";
-print_r($_POST); 
-echo "</pre>";
+// echo "<pre>";
+// print_r($_REQUEST);
+// echo "</pre>";
 
 $conexion = $db->getConexion();
 
-// Capturar los datos enviados por el formulario
-$nombre = $_POST['nombre'] ?? null;
-$apellido = $_POST['apellido'] ?? null;
-$correo = $_POST['correo'] ?? null;
-$fecha_nacimiento = $_POST['fecha_nacimiento'] ?? null;
-$id_genero = $_POST['id'] ?? null; 
-$id_ciudad = $_POST['id_ciudad'] ?? null;
-$lenguajes_seleccionados = $_POST['LENGUAJES'] ?? []; // Array de lenguajes seleccionados
 
-// Validar los datos obligatorios
+$nombre = $_POST['nombre'];
+$apellido = $_POST['apellido'];
+$correo = $_POST['correo'];
+$fecha_nacimiento = $_POST['fecha_nacimiento'];
+$id_genero = $_POST['id'];
+$id_ciudad = $_POST['id_ciudad'];
+$lenguajes_seleccionados = $_POST['LENGUAJES'];
+
 if (!$nombre || !$apellido || !$correo || !$fecha_nacimiento || !$id_genero || !$id_ciudad) {
     echo "Error: Faltan datos obligatorios.<br>";
 } else {
-    
+
     echo "Todos los datos obligatorios están presentes.<br>";
 }
 
-
-// Insertar en la tabla USUARIOS
 $sql_usuarios = "INSERT INTO usuarios (nombre, apellido, correo, fecha_nacimiento, id_genero, id_ciudad) 
                  VALUES (:nombre, :apellido, :correo, :fecha_nacimiento, :id_genero, :id_ciudad)";
 $stm_usuarios = $conexion->prepare($sql_usuarios);
@@ -39,27 +36,25 @@ $stm_usuarios->bindParam(":fecha_nacimiento", $fecha_nacimiento);
 $stm_usuarios->bindParam(":id_genero", $id_genero);
 $stm_usuarios->bindParam(":id_ciudad", $id_ciudad);
 
-if ($stm_usuarios->execute()) {
-    echo "Datos del usuario guardados exitosamente.<br>";
-} else {
-    echo "Error al guardar los datos del usuario.<br>";
+if ($stm_usuarios->execute())
+
+
+    $id_usuario = $conexion->lastInsertId();
+
+
+
+
+
+foreach ($lenguajes_seleccionados as $key => $value) {
+    echo $key . " " . $value;
+    $sqlR = "INSERT INTO lenguajes_usuarios (id_usuario, id_lenguaje) VALUES (:id_usuario, :id_lenguaje)";
+    $stmR = $conexion->prepare($sqlR);
+
+    $stmR->bindParam(":id_lenguaje ", $id_usuario);
+    $stmR->bindParam(":id_usuario", $value);
+    $stmR->execute();
 }
-
-
-// Obtener el ID del usuario recién insertado
-$id_usuario = $conexion->lastInsertId();
-
-// Insertar lenguajes seleccionados en lenguajes_usuarios
-foreach ($lenguajes_seleccionados as $id_lenguaje) {
-    $sql_lenguajes_usuarios = "INSERT INTO lenguajes_usuarios (id_usuario, id_lenguaje) VALUES (:id_usuario, :id_lenguaje)";
-    $stm_lenguajes_usuarios = $conexion->prepare($sql_lenguajes_usuarios);
-
-    $stm_lenguajes_usuarios->bindParam(":id_usuario", $id_usuario);
-    $stm_lenguajes_usuarios->bindParam(":id_lenguaje", $id_lenguaje);
-
-}
-
-
+header("Location: lista.php");
 
 // $usuario = $stm -> execute();
 

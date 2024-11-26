@@ -45,39 +45,41 @@ $lenguajes = $stm_lenguajes->fetchAll();
         <div>
             <label for="id_ciudad">Ciudades</label>
             <select name="id_ciudad" id="id_ciudad" required>
-    <?php foreach ($ciudades as $ciudad) { ?>
-        <option value="<?= $ciudad['id'] ?>"><?= $ciudad['nombre'] ?></option>
-    <?php } ?>
-</select>
+                <?php foreach ($ciudades as $ciudad) { ?>
+                    <option value="<?= $ciudad['id'] ?>"><?= $ciudad['nombre'] ?></option>
+                <?php } ?>
+            </select>
 
         </div>
         <div>
             <label>Género</label>
             <?php foreach ($generos as $genero) { ?>
-    <div>
-        <label>
-            <input type="radio" name="id" value="<?= $genero['id'] ?>" required>
-            <?= $genero['nombre'] ?>
-        </label>
-    </div>
-<?php } ?>
+                <div>
+                    <label>
+                        <input type="radio" name="id" value="<?= $genero['id'] ?>" required>
+                        <?= $genero['nombre'] ?>
+                    </label>
+                </div>
+            <?php } ?>
 
         </div>
         <div>
             <label>Lenguajes</label>
             <?php foreach ($lenguajes as $lenguaje) { ?>
-    <div>
-        <label>
-            <input type="checkbox" name="LENGUAJES[]" value="<?= $lenguaje['id'] ?>">
-            <?= $lenguaje['nombre'] ?>
-        </label>
-    </div>
-<?php } ?>
+                <div>
+                    <label>
+                        <input type="checkbox" name="LENGUAJES[]" value="<?= $lenguaje['id'] ?>">
+                        <?= $lenguaje['nombre'] ?>
+                    </label>
+                </div>
+            <?php } ?>
+
+
+
+
 
         </div>
         <br>
         <button type="submit">Guardar Datos</button>
     </fieldset>
 </form>
-
-
