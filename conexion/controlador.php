@@ -55,9 +55,3 @@ foreach ($lenguajes_seleccionados as $key => $value) {
     $stmR->execute();
 }
 header("Location: lista.php");
-
-// $usuario = $stm -> execute();
-
-// $id_usuario  = $conexion -> lastInsertId();
-
-// var_dump($id_usuario);
