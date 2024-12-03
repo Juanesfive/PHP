@@ -12,14 +12,15 @@ $usuarios = $stm_usuarios->fetchAll();
 
 <table border="1">
     <thead>
-        <th>ID</th>
+        <th>id</th>
         <th>Nombre</th>
-        <th>Apellido</th>
+        <th>apellido</th>
         <th>Correo</th>
         <th>Fecha de Nacimiento</th>
         <th>ID Género</th>
         <th>ID Ciudad</th>
-        <th>Lenguajes Seleccionados</th>
+        <th>Editar</th>
+        <th>Eliminar</th>
     </thead>
     <tbody>
     <?php
@@ -27,13 +28,12 @@ $usuarios = $stm_usuarios->fetchAll();
     ?>
             <tr>
             <td><?= $value['id'] ?></td>
-            <td><?= $value['Nombre'] ?></td>
-            <td><?= $value['Apellido'] ?></td>
-            <td><?= $value['Correo'] ?></td>
-            <td><?= $value['Fecha de Nacimiento'] ?></td>
-            <td><?= $value['ID Género'] ?></td>
-            <td><?= $value['ID Ciudad'] ?></td>
-            <td><?= $value['Lenguajes Seleccionados'] ?></td>
+            <td><?= $value['nombre'] ?></td>
+            <td><?= $value['apellido'] ?></td>
+            <td><?= $value['correo'] ?></td>
+            <td><?= $value['fecha_nacimiento'] ?></td>
+            <td><?= $value['id_genero'] ?></td>
+            <td><?= $value['id_ciudad'] ?></td>
             <td><a href="editar.php?id=<?=$value['id'] ?>">editar</a></td>
             <td><a href="eliminar.php?id=<?= $value['id'] ?>">eliminar</a></td>
             </tr>

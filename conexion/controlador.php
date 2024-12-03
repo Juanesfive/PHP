@@ -52,6 +52,6 @@ foreach ($lenguajes_seleccionados as $key => $value) {
 
     $stmR->bindParam(":id_lenguaje ", $id_usuario);
     $stmR->bindParam(":id_usuario", $value);
-    $stmR->execute();
+    // $stmR->execute();
 }
 header("Location: lista.php");
