@@ -1,0 +1,128 @@
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: Arial, sans-serif;
+  background-color: #f0fdfa;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+}
+
+.form {
+  background-color: white;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+}
+
+fieldset {
+  border: none;
+  padding: 0;
+  margin: 0;
+}
+
+legend {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #115e59;
+  margin-bottom: 20px;
+}
+
+.form__label {
+  display: block;
+  margin-bottom: 5px;
+  color: #0f766e;
+  text-align: center;
+  font-weight: bold;
+}
+
+.form__input,
+.form__select {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #5eead4;
+  border-radius: 4px;
+  font-size: 1rem;
+}
+
+.form__input,
+.form__select,
+.form__button {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  margin-bottom: 10px;
+}
+
+.form__input:focus,
+.form__select:focus {
+  outline: none;
+  border-color: #14b8a6;
+  box-shadow: 0 0 0 2px #99f6e4;
+}
+
+.form__button {
+  width: 100%;
+  padding: 12px;
+  background-color: #0d9488;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  font-size: 1rem;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.form__button:hover {
+  background-color: #0f766e;
+}
+
+.tabla__editar {
+  width: 100%;
+  border-spacing: 0;
+  margin-top: 20px;
+  background-color: white;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.tabla__editar th,
+.tabla__editar td {
+  text-align: left;
+  padding: 12px 15px;
+  border-bottom: 1px solid #99f6e4;
+}
+
+.tabla__editar thead th {
+  background-color: #0d9488;
+  color: white;
+  font-weight: bold;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  font-size: 0.9rem;
+}
+
+.tabla__editar tbody tr:hover {
+  background-color: #ccfbf1;
+}
+
+.tabla__editar td a {
+  color: #0f766e;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.tabla__editar td a:hover {
+  color: #14b8a6;
+}
+
+.error-mensaje {
+  color: rgb(255, 0, 0);
+}

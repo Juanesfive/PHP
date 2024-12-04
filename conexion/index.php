@@ -1,6 +1,5 @@
 <?php
 require('conexion.php');
-
 $db = new Conexion();
 $conexion = $db->getConexion();
 
@@ -23,63 +22,56 @@ $stm_lenguajes->execute();
 $lenguajes = $stm_lenguajes->fetchAll();
 ?>
 
-<form action="controlador.php" method="post">
+<link rel="stylesheet" type="text/css" href="./style.css">
+<form class="form" action="controlador.php" method="post">
     <fieldset>
-        <legend>Conexión PHP a MySQL</legend>
+        <legend>Agregar Usuario</legend>
         <div>
-            <label for="nombre">Nombres</label>
-            <input type="text" id="nombre" name="nombre" placeholder="Nombre" required>
+            <label class="form__label" for="nombre">Nombres</label>
+            <input class="form__input" type="text" id="nombre" name="nombre" placeholder="Nombre"  required>
         </div>
         <div>
-            <label for="apellido">Apellido</label>
-            <input type="text" id="apellido" name="apellido" placeholder="Apellido" required>
+            <label class="form__label" for="apellido">Apellido</label>
+            <input class="form__input" type="text" id="apellido" name="apellido" placeholder="Apellido" required>
         </div>
         <div>
-            <label for="correo">Correo</label>
-            <input type="email" id="correo" name="correo" placeholder="Correo" required>
+            <label class="form__label" for="correo">Correo</label>
+            <input class="form__input" type="email" id="correo" name="correo" placeholder="Correo" required>
         </div>
         <div>
-            <label for="fecha_nacimiento">Fecha Nacimiento</label>
-            <input type="date" id="fecha_nacimiento" name="fecha_nacimiento" required>
+            <label class="form__label" for="fecha_nacimiento">Fecha de Nacimiento</label>
+            <input class="form__input" type="date" id="fecha_nacimiento" name="fecha_nacimiento" required>
         </div>
         <div>
-            <label for="id_ciudad">Ciudades</label>
-            <select name="id_ciudad" id="id_ciudad" required>
+            <label class="form__label" for="id_ciudad">Ciudad</label>
+            <select class="form__select"  name="id_ciudad" id="id_ciudad" required>
                 <?php foreach ($ciudades as $ciudad) { ?>
-                    <option value="<?= $ciudad['id'] ?>"><?= $ciudad['nombre'] ?></option>
+                    <option value="<?= $ciudad['id_ciudad'] ?>"><?= $ciudad['nombre_ciudades'] ?></option>
                 <?php } ?>
             </select>
-
         </div>
         <div>
-            <label>Género</label>
+            <label class="form__label">Género</label>
             <?php foreach ($generos as $genero) { ?>
                 <div>
                     <label>
-                        <input type="radio" name="id" value="<?= $genero['id'] ?>" required>
-                        <?= $genero['nombre'] ?>
+                        <input type="radio" name="id_genero" value="<?= $genero['id_genero'] ?>" required>
+                        <?= $genero['nombre_genero'] ?>
                     </label>
                 </div>
             <?php } ?>
-
         </div>
         <div>
-            <label>Lenguajes</label>
+            <label class="form__label">Lenguajes</label>
             <?php foreach ($lenguajes as $lenguaje) { ?>
                 <div>
                     <label>
-                        <input type="checkbox" name="LENGUAJES[]" value="<?= $lenguaje['id'] ?>">
-                        <?= $lenguaje['nombre'] ?>
+                        <input type="checkbox" name="LENGUAJES[]" value="<?= $lenguaje['id_lenguaje'] ?>">
+                        <?= $lenguaje['nombre_lenguajes'] ?>
                     </label>
                 </div>
             <?php } ?>
-
-
-
-
-
         </div>
-        <br>
-        <button type="submit">Guardar Datos</button>
+        <button class="form__button" type="submit">Guardar Datos</button>
     </fieldset>
 </form>
