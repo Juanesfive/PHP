@@ -11,7 +11,7 @@ $correo = $_POST['correo'];
 $fecha_nacimiento = $_POST['fecha_nacimiento'];
 $id_genero = $_POST['id_genero']; 
 $id_ciudad = $_POST['id_ciudad'];
-$lenguajes_seleccionados = $_POST['LENGUAJES'] ;
+$lenguajes_seleccionados = $_POST['LENGUAJES'] ?? null;
 
 $errores = [];
 
@@ -34,23 +34,23 @@ $stm_verificar_correo = $conexion->prepare($sql_verificar_correo);
 $stm_verificar_correo->bindParam(":correo", $correo);
 $stm_verificar_correo->execute();
 if ($stm_verificar_correo->rowCount() > 0) {
-    $errores[] = "El correo electrónico ya está registrado en la base de datos.";
+    $errores[] = "El correo electrónico ya está registrado en la base de datos. ";
 }
 
 
 if (empty($id_genero)) {
-    $errores[] = "Debes seleccionar al menos un género.";
+    $errores[] = "Debes seleccionar al menos un género. ";
 }
 
 
 if (empty($lenguajes_seleccionados)) {
-    $errores[] = "Debes seleccionar al menos un lenguaje.";
+    $errores[] = "Debes seleccionar al menos un lenguaje. ";
 }
 
 
 if (count($errores) > 0) {
-    foreach ($errores as $error) {
-        echo "<p class='error-mensaje'>Error: $error</p>";
+    foreach ($errores as $key => $value) {
+        echo "<p class='error-mensaje'>Error: $value</p>";
     }
     exit(); 
 }
@@ -73,9 +73,9 @@ if ($stm_usuarios->execute()) {
     $sqlR = "INSERT INTO lenguajes_usuarios (id_usuario, id_lenguaje) VALUES (:id_usuario, :id_lenguaje)";
     $stmR = $conexion->prepare($sqlR);
     
-    foreach ($lenguajes_seleccionados as $id_lenguaje) {
+    foreach ($lenguajes_seleccionados as $key => $value) {
         $stmR->bindParam(":id_usuario", $id_usuario);
-        $stmR->bindParam(":id_lenguaje", $id_lenguaje);
+        $stmR->bindParam(":id_lenguaje", $value);
         $stmR->execute();
     }
 

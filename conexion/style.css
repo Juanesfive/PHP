@@ -13,7 +13,7 @@ body {
   min-height: 100vh;
 }
 
-.form {
+.formulario {
   background-color: white;
   border-radius: 8px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
@@ -33,7 +33,7 @@ legend {
   margin-bottom: 20px;
 }
 
-.form__label {
+.formulario__datos {
   display: block;
   margin-bottom: 5px;
   color: #0f766e;
@@ -41,8 +41,8 @@ legend {
   font-weight: bold;
 }
 
-.form__input,
-.form__select {
+.formulario__entrada-datos,
+.formulario__ciudad {
   width: 100%;
   padding: 10px;
   border: 1px solid #5eead4;
@@ -50,9 +50,9 @@ legend {
   font-size: 1rem;
 }
 
-.form__input,
-.form__select,
-.form__button {
+.formulario__entrada-datos,
+.formulario__ciudad,
+.formulario__boton {
   width: 100%;
   padding: 10px;
   border: 1px solid #ccc;
@@ -60,14 +60,14 @@ legend {
   margin-bottom: 10px;
 }
 
-.form__input:focus,
-.form__select:focus {
+.formulario__entrada-datos:focus,
+.formulario__ciudad:focus {
   outline: none;
   border-color: #14b8a6;
   box-shadow: 0 0 0 2px #99f6e4;
 }
 
-.form__button {
+.formulario__boton {
   width: 100%;
   padding: 12px;
   background-color: #0d9488;
@@ -79,7 +79,7 @@ legend {
   cursor: pointer;
 }
 
-.form__button:hover {
+.formulario__boton:hover {
   background-color: #0f766e;
 }
 
@@ -125,4 +125,5 @@ legend {
 
 .error-mensaje {
   color: rgb(255, 0, 0);
+  padding: 50px;
 }

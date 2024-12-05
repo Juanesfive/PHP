@@ -1,0 +1,88 @@
+use adso_2894667;
+
+
+drop table if exists ciudades;
+drop table if exists generos;
+drop table if exists usuarios;
+drop table if exists lenguajes;
+drop table if exists lenguajes_usuarios;
+
+
+create table generos (
+    id_genero int auto_increment primary key,
+    nombre_genero varchar(20)
+);
+
+
+create table ciudades (
+    id_ciudad int auto_increment primary key,
+    nombre_ciudades varchar(20)
+);
+
+
+create table usuarios (
+    id_usuarios int auto_increment primary key,
+    nombre varchar(30),
+    apellido varchar(30),
+    correo varchar(50) unique,
+    fecha_nacimiento date,
+    id_genero int,
+    id_ciudad int,
+    foreign key (id_genero) references generos(id_genero),
+    foreign key (id_ciudad) references ciudades(id_ciudad)
+);
+
+
+create table lenguajes (
+    id_lenguaje int auto_increment primary key,
+    nombre_lenguajes varchar(30)
+);
+
+
+create table lenguajes_usuarios (
+    id_usuario int,
+    id_lenguaje int, 
+    foreign key (id_usuario) references usuarios(id_usuarios),
+    foreign key (id_lenguaje) references lenguajes(id_lenguaje)
+);
+
+
+insert into ciudades (nombre_ciudades) values 
+    ('bucaramanga'),
+    ('floridablanca'),
+    ('giron'),
+    ('piedecuesta'),
+    ('lebrija');
+
+
+insert into generos (nombre_genero) values 
+    ('masculino'),
+    ('femenino'),
+    ('otros');
+
+
+insert into lenguajes (nombre_lenguajes) values 
+    ('java'),
+    ('javascript'),
+    ('.net'),
+    ('c#'),
+    ('php'),
+    ('python');
+
+
+
+select * from ciudades;
+select * from generos;
+describe usuarios;
+select * from usuarios;
+
+
+
+-------------------------------------------------------------------------------------------------------------------------
+
+Codigo para crear el usuario:
+
+create user JuanVasquez_2894667@localhost identified by '#Aprendiz2024';
+create database adso_2894667;
+grant all privileges on adso_2894667. * to JuanVasquez_2894667@localhost;
+flush privileges;

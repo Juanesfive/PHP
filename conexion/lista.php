@@ -21,7 +21,7 @@ $usuarios = $stm_usuarios->fetchAll();
         <th>Eliminar</th>
     </thead>
     <tbody>
-        <?php foreach ($usuarios as $value) { ?>
+        <?php foreach ($usuarios as $key => $value) { ?>
             <tr>
                 <td><?= $value['id_usuarios'] ?></td>
                 <td><?= $value['nombre'] ?></td>
